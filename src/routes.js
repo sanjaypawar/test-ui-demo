@@ -2,7 +2,7 @@ import React from 'react';
 import Home from './Home';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 
-export default Routes(){
+export default function Routes(){
 
     return(
         <Router>
@@ -10,5 +10,5 @@ export default Routes(){
                 <Route exact path='/' componant={ Home }/>
             </Switch>
         </Router>
-    )
-}
+    );
+};
