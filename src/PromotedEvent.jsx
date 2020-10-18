@@ -119,12 +119,12 @@ export default function PromotedEvents (){
       </AutoPlaySwipeableViews>
       <MobileStepper
       variant="dots"
-      steps={6}
+      steps={9}
       position="static"
       activeStep={activeStep}
       className={classes.root}
       nextButton={
-        <Button size="small" onClick={handleNext} disabled={activeStep === 5}>
+        <Button size="small" onClick={handleNext} disabled={activeStep === 8}>
           Next
           {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
         </Button>
