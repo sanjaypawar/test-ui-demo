@@ -1,7 +1,7 @@
 import React from 'react';
 import Home from './Home';
 import Navbar from './Navbar';
-import PromotedEvent from './PromotedEvent';
+import PromotedEvents from './PromotedEvents';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 
 export default function Routes(){
@@ -12,7 +12,7 @@ export default function Routes(){
                 <Route exact path='/' >
                     <Navbar />
                   <Home />
-                  <PromotedEvent />
+                  <PromotedEvents />
                 </Route>
             </Switch>
         </Router>

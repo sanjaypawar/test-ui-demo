@@ -33,7 +33,7 @@ const useStyles = makeStyles( {
     fontWeight: 'bold',
   },
   coupon:{
-    padding: '130px',
+    paddingTop: 130,
   },
   location: {
     marginLeft: '10px',
@@ -102,78 +102,75 @@ const Products =() =>{
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleStep = (step) => () => {
-    setActiveStep(step);
-  };
-
-  const handleComplete = () => {
-    const newCompleted = completed;
-    newCompleted[activeStep] = true;
-    setCompleted(newCompleted);
-    handleNext();
-  };
 
   const handleReset = () => {
     setActiveStep(0);
     setCompleted({});
   };
   return (
-    <div className={classes.coupon}>
-      <AutoPlaySwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={activeStep}
-        /* onChangeIndex={handleStepChange} */
-        enableMouseEvents
-      >
-      {productsSteps.map((step, index) => (
-      <div key={step.label}>
-        {Math.abs(activeStep - index) <= 2 ? (
-        <Grid container spacing={0}>
-          <Grid item xs={5}></Grid>
-          <Grid item xs={2}>
-            <div>
-              <img className={classes.myproducts} src={step.imgPath} alt={step.label} />
-            </div>
-          </Grid>
-          <Grid item xs={5}>
-            <React.Fragment>
-              <Container maxWidth="sm" className={classes.h1}>
-                <Typography component="div" />
-                <h1>{step.label}</h1> 
-                <span className={classes.uipath}>{step.department}</span>
-                <Room className={classes.location} fontSize='small'/>
-                <span className={classes.location}>{step.location}</span>
-                <div>
-                  <Button size='small' className={classes.mybutton} >JOIN NOW</Button>
-                </div>
-              </Container>
-            </React.Fragment>
-          </Grid>
-        </Grid> 
-        ) : null}
+    <>
+      <div className={classes.coupon}>
+        <AutoPlaySwipeableViews
+          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+          index={activeStep}
+          /* onChangeIndex={handleStepChange} */
+          enableMouseEvents
+        >
+        {productsSteps.map((step, index) => (
+        <div key={step.label}>
+          {Math.abs(activeStep - index) <= 3 ? (
+          <Grid container spacing={0}>
+            <Grid item xs={5}></Grid>
+            <Grid item xs={2}>
+              <div>
+                <img className={classes.myproducts} src={step.imgPath} alt={step.label} />
+              </div>
+            </Grid>
+            <Grid item xs={5}>
+              <React.Fragment>
+                <Container maxWidth="sm" className={classes.h1}>
+                  <Typography component="div" />
+                  <h1>{step.label}</h1> 
+                  <span className={classes.uipath}>{step.department}</span>
+                  <Room className={classes.location} fontSize='small'/>
+                  <span className={classes.location}>{step.location}</span>
+                  <div>
+                    <Button size='small' className={classes.mybutton} >JOIN NOW</Button>
+                  </div>
+                </Container>
+              </React.Fragment>
+            </Grid>
+          </Grid> 
+          ) : null}
+        </div>
+        ))}
+        </AutoPlaySwipeableViews>
+        
       </div>
-      ))}
-      </AutoPlaySwipeableViews>
-       {/* <MobileStepper
-        variant="dots"
-        steps={3}
-        position="static"
-        activeStep={activeStep}
-        className={classes.root}
-        nextButton={
-          <Button size="small" onClick={handleNext} disabled={activeStep === 2}>
-            Next
-            {theme.direction === 'rtl' }
-          </Button>
-          }
-          backButton={
-          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-            {theme.direction === 'rtl' }
+      <div>
+        {allStepsCompleted() ? (
+        <div>
+          <Typography >
+            All steps completed - you&apos;re finished
+          </Typography>
+          <Button onClick={handleReset}>Reset</Button>
+        </div>
+        ) : (
+        <div>
+          <Button disabled={activeStep === 0} onClick={handleBack} >
             Back
           </Button>
-          }
-        /> */}
-    </div>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleNext}
+          >
+            Next
+          </Button>
+        </div>
+        )}
+      </div>
+    </>
   );
 };
 export default Products;
