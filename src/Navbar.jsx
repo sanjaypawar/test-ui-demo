@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => {
       margin: theme.spacing(1),
       borderRadius: '50px',
       color: 'white',
+      fontWeight: 'bold',
     },
     root: {
       maxWidth: 'auto',
@@ -130,9 +131,9 @@ const Navbar =() =>{
           />
         </DialogContent>
         <DialogActions>
-          {/* <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} color="primary">
             Cancel
-          </Button> */}
+          </Button>
           <Button fullWidth='false' variant="contained" color="primary">
             Register Now
           </Button>

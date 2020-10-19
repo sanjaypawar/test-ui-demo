@@ -7,7 +7,7 @@ import StepperImageOne from './img/items/1.jpg';
 import StepperImageTwo from './img/items/11.jpg';
 import StepperImageThree from './img/items/4.jpg';
 import StepperImageFour from './img/items/5.png';
-import StepperImageFive from './img/items/6.jpg';
+import StepperImageFive from './img/items/29.jpg';
 import StepperImageSix from './img/items/10.jpg';
 import StepperImageSeven from './img/items/28.jpg';
 import StepperImageEight from './img/items/12.jpg';
@@ -24,22 +24,20 @@ const useStyles = makeStyles(() => {
       overflow: 'hidden',
       height: '250px',
       width: '250px',
+      padding: '0px 0px 10px 10px',
     },
     header: {
       display: 'flex',
       paddingTop: "30px"
     },
     mylabel:{
-      position: 'absolute', 
       color: 'white',
-      left: '40%', 
       fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif',
-      fontSize: 30,
+      fontSize: 25,
     },
-    mydescription:{
-      position: 'absolute', 
+    mydescription:{ 
+      position: 'absolute',
       color: 'white',
-      left: '40%', 
       fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif',
     },
     h1: {
@@ -62,7 +60,7 @@ const useStyles = makeStyles(() => {
     },
     events: {
       marginTop: 50,
-      backgroundColor:"blue",
+      backgroundColor:"#337ab7",
     },
     mypadding: {
       padding: 50,
@@ -148,11 +146,12 @@ export default function PromotedEvents (){
   };
   return(
     <div className={classes.events}>
-      <Grid className={classes.mypadding} container spacing={0}>
-          <Grid  item xs={6}>
+      <Grid item className={classes.mypadding} container >
+      
+          <Grid item xs={4}>
             <span className={classes.h1} >Promoted Events</span>
-          </Grid>
-          <Grid tem xs={6}>
+          </Grid><Grid item xs={4}></Grid>
+          <Grid item xs={4}>
             <Button size='small' className={classes.mybutton} >PRAMOTE YOURS</Button>
             <StyledButton onClick={handleBack} disabled={activeStep === 0}>
               {theme.direction === 'rtl' ? <KeyboardArrowRight className={classes.myarrow}/>
@@ -172,14 +171,14 @@ export default function PromotedEvents (){
       >  
         {tutorialSteps.map((step, index) => (
           <div className={classes.img}>
-            <div key={step.label}>
+            <div >
             {Math.abs(activeStep - index) <= 9 ? (
               <div style={{backgroundImage: `url(${step.imgPath})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain', height: '250px', width: '250px'}}>
-                {step.label}
+                <p className={classes.mylabel}>{step.label}</p>
+              <p className={classes.mydescription}>{step.description}</p>
               </div>
             ) : null}
-              <span >{step.label}</span>
-              <span >{step.description}</span>
+              
             </div>
           </div>
         ))}

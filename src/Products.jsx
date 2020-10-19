@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme, withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -11,6 +11,8 @@ import { autoPlay } from 'react-swipeable-views-utils';
 import ProductImageOne from './img/items/15.jpg';
 import ProductImageTwo from './img/items/27.jpg';
 import ProductImageThree from './img/items/5.jpg';
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 
 const useStyles = makeStyles( {
   myproducts: {
@@ -29,8 +31,9 @@ const useStyles = makeStyles( {
     color: 'white',
   },
   uipath:{
-    backgroundColor: 'blue',
+    backgroundColor: '#337ab7',
     fontWeight: 'bold',
+    borderRadius: '15px',
   },
   coupon:{
     paddingTop: 130,
@@ -38,7 +41,21 @@ const useStyles = makeStyles( {
   location: {
     marginLeft: '10px',
   },
+  myarrow:{
+    marginLeft: '5px',
+    color: 'white',
+    borderRadius: '50px',
+    border: '3px solid white',
+    fontSize: 30,
+  },
 });
+
+const StyledButton = withStyles({
+  root: {
+    minWidth: 'unset',
+    padding: 'unset',
+  },
+})(Button);
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 const productsSteps = [
   {
@@ -119,7 +136,7 @@ const Products =() =>{
         {productsSteps.map((step, index) => (
         <div key={step.label}>
           {Math.abs(activeStep - index) <= 3 ? (
-          <Grid container spacing={0}>
+          <Grid container>
             <Grid item xs={5}></Grid>
             <Grid item xs={2}>
               <div>
@@ -134,6 +151,7 @@ const Products =() =>{
                   <span className={classes.uipath}>{step.department}</span>
                   <Room className={classes.location} fontSize='small'/>
                   <span className={classes.location}>{step.location}</span>
+                  <hr/>
                   <div>
                     <Button size='small' className={classes.mybutton} >JOIN NOW</Button>
                   </div>
@@ -157,16 +175,14 @@ const Products =() =>{
         </div>
         ) : (
         <div>
-          <Button disabled={activeStep === 0} onClick={handleBack} >
-            Back
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleNext}
-          >
-            Next
-          </Button>
+          <StyledButton onClick={handleBack} disabled={activeStep === 0}>
+              {theme.direction === 'rtl' ? <KeyboardArrowRight className={classes.myarrow}/>
+              : <KeyboardArrowLeft className={classes.myarrow}/>}
+            </StyledButton>
+            <StyledButton onClick={handleNext} disabled={activeStep === 8}> 
+              {theme.direction === 'rtl' ? <KeyboardArrowLeft className={classes.myarrow}/>
+              : <KeyboardArrowRight className={classes.myarrow}/>}
+            </StyledButton>
         </div>
         )}
       </div>
